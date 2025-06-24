@@ -5,7 +5,7 @@ import com.nhan.aop.dto.JwtAuthenticationResponse;
 import com.nhan.aop.dto.LoginRequest;
 import com.nhan.aop.dto.UserSignupDto;
 import com.nhan.aop.filter.JwtTokenProvider;
-import com.nhan.aop.model.User;
+import com.nhan.aop.entity.User;
 import com.nhan.aop.security.CustomUserDetailsService;
 import com.nhan.aop.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;

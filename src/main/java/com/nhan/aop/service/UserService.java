@@ -2,8 +2,8 @@ package com.nhan.aop.service;
 
 import com.nhan.aop.annotations.RoleRequired;
 import com.nhan.aop.dto.UserSignupDto;
-import com.nhan.aop.model.Role;
-import com.nhan.aop.model.User;
+import com.nhan.aop.entity.Role;
+import com.nhan.aop.entity.User;
 import com.nhan.aop.repository.RoleRepository;
 import com.nhan.aop.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
