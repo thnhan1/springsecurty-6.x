@@ -1,6 +1,7 @@
 package com.nhan.aop.filter;
 
 import com.nhan.aop.security.CustomUserDetailsService;
+import com.nhan.aop.utils.TokenBlacklistService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,12 +21,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
   private  final JwtTokenProvider jwtTokenProvider;
   private final CustomUserDetailsService customUserDetailsService;
+  private final TokenBlacklistService blacklistService;
   Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
   public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider,
-      CustomUserDetailsService customUserDetailsService) {
+      CustomUserDetailsService customUserDetailsService,
+      TokenBlacklistService blacklistService) {
     this.jwtTokenProvider = jwtTokenProvider;
     this.customUserDetailsService = customUserDetailsService;
+    this.blacklistService = blacklistService;
   }
 
   @Override
@@ -34,7 +38,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     try {
       String jwt = getJwtFromRequest(request);
 
-      if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)) {
+      if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)
+          && !blacklistService.isBlacklisted(jwt)) {
         String username = jwtTokenProvider.getUsernameFromJWT(jwt);
 
         UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);

@@ -1,4 +1,4 @@
-package com.nhan.aop.model;
+package com.nhan.aop.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
