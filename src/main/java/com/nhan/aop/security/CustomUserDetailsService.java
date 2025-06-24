@@ -1,7 +1,7 @@
 package com.nhan.aop.security;
 
-import com.nhan.aop.model.Role;
-import com.nhan.aop.model.User;
+import com.nhan.aop.entity.Role;
+import com.nhan.aop.entity.User;
 import com.nhan.aop.repository.UserRepository;
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -32,6 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         user.getId(),
         user.getUsername(),
         user.getPassword(),
+        user.isEnabled(),
         mapRolesToAuthorities(user.getRoles())
     );
   }

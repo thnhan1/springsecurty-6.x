@@ -44,7 +44,7 @@ public class SecurityConfig {
       JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
     http.csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/public/**", "/api/login", "/api/users/signup").permitAll()
+            .requestMatchers("/auth/**", "/public/**").permitAll()
             .requestMatchers("/api/admin/**").hasRole("ADMIN")
             .requestMatchers("/api/user/**").hasRole("USER")
             .anyRequest().authenticated());
